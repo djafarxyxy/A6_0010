@@ -1,32 +1,42 @@
 package com.example.aplikasi1.data.repository
 
+import com.example.aplikasi1.data.model.Acara
 import com.example.aplikasi1.data.model.Lokasi
+import com.example.aplikasi1.data.model.LokasiResponse
+import com.example.aplikasi1.data.service.LokasiService
+import java.io.IOException
 
+interface LokasiRepository {
+
+    suspend fun insertLokasi(lokasi: Lokasi)
+
+    suspend fun getLokasi(): List<Lokasi>
+
+    suspend fun updateLokasi(idLokasi: String, lokasi: Lokasi)
+
+    suspend fun deleteLokasi(idLokasi: String)
+
+    suspend fun getLokasiById(idLokasi: String): Lokasi
+}
 
 class NetworkLokasiRepository(
-    private val lokasiApiService : LokasiService
+    private val lokasiApiService: LokasiService // Mengganti MahasiswaService dengan LokasiService
 ) : LokasiRepository {
-    override suspend fun getLokasi(): LokasiResponse {
-        return try {
-            lokasiApiService.getLokasi()
-        } catch (e: Exception) {
-            throw IOException("Failed to fetch lokasi data: ${e.message}")
-        }
-    }
 
     override suspend fun insertLokasi(lokasi: Lokasi) {
         lokasiApiService.insertLokasi(lokasi)
     }
 
-    override suspend fun updateLokasi(idLokasi: Int, lokasi: Lokasi) {
+    override suspend fun updateLokasi(idLokasi: String, lokasi: Lokasi) {
         lokasiApiService.updateLokasi(idLokasi, lokasi)
     }
 
-    override suspend fun deleteLokasi(idLokasi: Int) {
+    override suspend fun deleteLokasi(idLokasi: String) {
         try {
-            val response = lokasiApiService.deletelokasi(idLokasi)
+            val response = lokasiApiService.deleteLokasi(idLokasi)
             if (!response.isSuccessful) {
-                throw IOException("gagal menghapus data Lokasi. HTTP kode: ${response.code()}")
+                throw IOException("Failed to delete lokasi. HTTP Status Code: " +
+                        "${response.code()}")
             } else {
                 response.message()
                 println(response.message())
@@ -36,7 +46,10 @@ class NetworkLokasiRepository(
         }
     }
 
-    override suspend fun getMahasiswaById(idMhs: Int): Mahasiswa {
-        return mahasiswaApiService.getMahasiswaById(idMhs).data
+    override suspend fun getLokasi(): List<Lokasi> =
+        lokasiApiService.getAllLokasi()
+
+    override suspend fun getLokasiById(idLokasi: String): Lokasi {
+        return lokasiApiService.getLokasiById(idLokasi)
     }
 }
