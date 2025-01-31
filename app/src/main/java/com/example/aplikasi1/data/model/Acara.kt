@@ -1,9 +1,12 @@
 package com.example.aplikasi1.data.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 @Serializable
 data class Acara(
     @SerialName("id_acara")
-    val idAcara: Int, // ID unik untuk acara
+    val idAcara: String, // ID unik untuk acara
 
     @SerialName("nama_acara")
     val namaAcara: String, // Nama acara
@@ -18,24 +21,24 @@ data class Acara(
     val tanggalBerakhir: String, // Tanggal dan waktu berakhir acara (format ISO 8601)
 
     @SerialName("id_lokasi")
-    val idLokasi: Int, // ID lokasi acara
+    val idLokasi: String, // ID lokasi acara
 
     @SerialName("id_klien")
-    val idKlien: Int, // ID klien acara
+    val idKlien: String, // ID klien acara
 
     @SerialName("status_acara")
     val statusAcara: String // Status acara (e.g., "Direncanakan", "Berlangsung", "Selesai")
 )
 
 @Serializable
-data class BangunanResponse(
+data class AcaraResponse(
     val status: Boolean,
     val message: String,
     val data: List<Acara>
 )
 
 @Serializable
-data class BangunanDetailResponse(
+data class AcaraDetailResponse(
     val status: Boolean,
     val message: String,
     val data: Acara
