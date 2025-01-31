@@ -1,28 +1,35 @@
 package com.example.aplikasi1.data.service
 
 import com.example.aplikasi1.data.model.Vendor
-import com.example.aplikasi1.data.model.VendorDetailResponse
-import com.example.aplikasi1.data.model.VendorResponse
-import kotlinx.coroutines.delay
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface VendorService {
+
     @Headers(
         "Accept: application/json",
-        "Content-Type: application/json"
+        "Content-Type: application/json",
     )
 
-    @GET("vendor")
-    suspend fun getVendor(): VendorResponse
-
-    @GET("vendor/{idVendor}")
-    suspend fun getVendorById(@Path("idVendor") idVendor: Int): VendorDetailResponse
-
-    @POST("vendor/store")
+    @POST("insertvendor.php")
     suspend fun insertVendor(@Body vendor: Vendor)
 
-    @PUT("vendor/{idVendor}")
-    suspend fun updateVendor(@Path("idVendor") idVendor: Int, @Body vendor: Vendor)
+    @GET("bacavendor.php")
+    suspend fun getAllVendors(): List<Vendor>
 
-    @DELETE("vendor/{idVendor}")
-    suspend fun deleteVendor(@Path("idVendor") idVendor: Int): Response<Void>
+    @GET("baca1vendor.php/{id_vendor}")
+    suspend fun getVendorById(@Query("id_vendor") idVendor: String): Vendor
+
+    @PUT("editvendor.php/{id_vendor}")
+    suspend fun updateVendor(@Query("id_vendor") idVendor: String, @Body vendor: Vendor)
+
+    @DELETE("deletevendor.php/{id_vendor}")
+    suspend fun deleteVendor(@Query("id_vendor") idVendor: String): Response<Void>
 }
+
