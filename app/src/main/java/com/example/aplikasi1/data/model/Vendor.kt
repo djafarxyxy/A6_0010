@@ -1,21 +1,21 @@
 package com.example.aplikasi1.data.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 @Serializable
 data class Vendor(
     @SerialName("id_vendor")
-    val idVendor: Int, // ID unik vendor
+    val idVendor: String, // ID unik vendor
 
     @SerialName("nama_vendor")
     val namaVendor: String, // Nama vendor
 
+    @SerialName("jenis_vendor")
+    val jenisVendor: String, // jenis layanan vendor
+
     @SerialName("kontak_vendor")
     val kontakVendor: String, // Informasi kontak vendor
-
-    @SerialName("alamat_vendor")
-    val alamatVendor: String, // Alamat lengkap vendor
-
-    @SerialName("status_vendor")
-    val statusVendor: String // Status vendor (aktif/non-aktif)
 )
 
 @Serializable
