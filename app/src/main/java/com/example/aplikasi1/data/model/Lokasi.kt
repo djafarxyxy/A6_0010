@@ -1,9 +1,12 @@
 package com.example.aplikasi1.data.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 @Serializable
 data class Lokasi(
     @SerialName("id_lokasi")
-    val idLokasi: Int, // ID unik lokasi
+    val idLokasi: String, // ID unik lokasi\
 
     @SerialName("nama_lokasi")
     val namaLokasi: String, // Nama lokasi
@@ -11,7 +14,7 @@ data class Lokasi(
     @SerialName("alamat_lokasi")
     val alamatLokasi: String, // Alamat lengkap lokasi
 
-    val kapasitas: Int // Kapasitas maksimal lokasi
+    val kapasitas: String // Kapasitas maksimal lokasi
 )
 
 @Serializable
