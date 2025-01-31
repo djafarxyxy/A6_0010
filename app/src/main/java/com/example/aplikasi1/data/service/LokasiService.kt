@@ -1,26 +1,34 @@
 package com.example.aplikasi1.data.service
 
 import com.example.aplikasi1.data.model.Lokasi
-import com.example.aplikasi1.data.model.Vendor
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface LokasiService {
+
     @Headers(
         "Accept: application/json",
-        "Content-Type: application/json"
+        "Content-Type: application/json",
     )
 
-    @GET("lokasi")
-    suspend fun getLokasi(): LokasiResponse
-
-    @GET("lokasi/{idLokasi}")
-    suspend fun getLokasiById(@Path("idLokasi") idLokasi: Int): LokasiDetailResponse
-
-    @POST("lokasi/store")
+    @POST("insertlokasi.php")
     suspend fun insertLokasi(@Body lokasi: Lokasi)
 
-    @PUT("lokasi/{idLokasi}")
-    suspend fun updateLokasi(@Path("idLokasi") idLokasi: Int, @Body lokasi: Lokasi)
+    @GET("bacalokasi.php")
+    suspend fun getAllLokasi(): List<Lokasi>
 
-    @DELETE("lokasi/{idLokasi}")
-    suspend fun deleteLokasi(@Path("idLokasi") idLokasi: Int): Response<Void>
+    @GET("baca1lokasi.php/{id_lokasi}")
+    suspend fun getLokasiById(@Query("id_lokasi") idLokasi: String): Lokasi
+
+    @PUT("editlokasi.php/{id_lokasi}")
+    suspend fun updateLokasi(@Query("id_lokasi") idLokasi: String, @Body lokasi: Lokasi)
+
+    @DELETE("deletelokasi.php/{id_lokasi}")
+    suspend fun deleteLokasi(@Query("id_lokasi") idLokasi: String): Response<Void>
 }
