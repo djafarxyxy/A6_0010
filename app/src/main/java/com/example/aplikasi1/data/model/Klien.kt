@@ -1,9 +1,12 @@
 package com.example.aplikasi1.data.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 @Serializable
 data class Klien(
     @SerialName("id_klien")
-    val idKlien: Int, // ID unik klien
+    val idKlien: String, // ID unik klien
 
     @SerialName("nama_klien")
     val namaKlien: String, // Nama klien
