@@ -1,25 +1,34 @@
 package com.example.aplikasi1.data.service
 
 import com.example.aplikasi1.data.model.Klien
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface KlienService {
+
     @Headers(
         "Accept: application/json",
-        "Content-Type: application/json"
+        "Content-Type: application/json",
     )
 
-    @GET("klien")
-    suspend fun getKlien(): KlienResponse
-
-    @GET("klien/{idKlien}")
-    suspend fun getKlienById(@Path("idKlien") idKlien: Int): KlienDetailResponse
-
-    @POST("klien/store")
+    @POST("insertklien.php")
     suspend fun insertKlien(@Body klien: Klien)
 
-    @PUT("klien/{idKlien}")
-    suspend fun updateKlien(@Path("idKlien") idKlien: Int, @Body klien: Klien)
+    @GET("bacaklien.php")
+    suspend fun getAllKlien(): List<Klien>
 
-    @DELETE("klien/{idKlien}")
-    suspend fun deleteKlien(@Path("idKlien") idKlien: Int): Response<Void>
+    @GET("baca1klien.php/{id_klien}")
+    suspend fun getKlienById(@Query("id_klien") idKlien: String): Klien
+
+    @PUT("editklien.php/{id_klien}")
+    suspend fun updateKlien(@Query("id_klien") idKlien: String, @Body klien: Klien)
+
+    @DELETE("deleteklien.php/{id_klien}")
+    suspend fun deleteKlien(@Query("id_klien") idKlien: String): Response<Void>
 }
