@@ -1,40 +1,38 @@
 package com.example.aplikasi1.data.repository
 
 import com.example.aplikasi1.data.model.Klien
+import com.example.aplikasi1.data.model.KlienResponse
 import com.example.aplikasi1.data.service.KlienService
+import java.io.IOException
 
-interface KlienRepository{
-    suspend fun getKlien() : KlienResponse
-    suspend fun insertKlien(kamar: Klien)
-    suspend fun updateKlien(idKlien: Int, klien: Klien)
-    suspend fun deleteKlien(idKlien: Int)
-    suspend fun getKlienById(idKlien: Int): Klien
+interface KlienRepository {
+    suspend fun insertKlien(klien: Klien)
+
+    suspend fun getKlien(): List<Klien>
+
+    suspend fun updateKlien(idKlien: String, klien: Klien)
+
+    suspend fun deleteKlien(idKlien: String)
+
+    suspend fun getKlienById(idKlien: String): Klien
 }
 
 class NetworkKlienRepository(
-    private val klienApiService : KlienService
+    private val klienApiService: KlienService
 ) : KlienRepository {
-    override suspend fun getKlien(): KlienResponse {
-        return try {
-            klienApiService.getKlien()
-        } catch (e: Exception) {
-            throw IOException("Failed to fetch klien data : ${e.message}")
-        }
-    }
-
     override suspend fun insertKlien(klien: Klien) {
         klienApiService.insertKlien(klien)
     }
 
-    override suspend fun updateKlien(idKlien: Int, klien: Klien) {
+    override suspend fun updateKlien(idKlien: String, klien: Klien) {
         klienApiService.updateKlien(idKlien, klien)
     }
 
-    override suspend fun deleteKlien(idKlien: Int) {
+    override suspend fun deleteKlien(idKlien: String) {
         try {
             val response = klienApiService.deleteKlien(idKlien)
             if (!response.isSuccessful) {
-                throw IOException("gagal menghapus data klien. HTTP kode: ${response.code()}")
+                throw IOException("Failed to delete Klien. HTTP Status Code: ${response.code()}")
             } else {
                 response.message()
                 println(response.message())
@@ -44,8 +42,10 @@ class NetworkKlienRepository(
         }
     }
 
-    override suspend fun getKlienById(idKlien: Int): Klien {
-        return klienApiService.getKlienById(idKlien).data
-    }
+    override suspend fun getKlien(): List<Klien> =
+        klienApiService.getAllKlien()
 
+    override suspend fun getKlienById(idKlien: String): Klien {
+        return klienApiService.getKlienById(idKlien)
+    }
 }
