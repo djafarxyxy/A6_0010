@@ -1,13 +1,14 @@
 package com.example.aplikasi1.ui.viewmodel.acara
 
+import android.net.http.HttpException
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import coil.network.HttpException
 import com.example.aplikasi1.data.model.Acara
-import com.example.aplikasi1.data.model.AcaraResponse
 import com.example.aplikasi1.data.repository.AcaraRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -18,6 +19,7 @@ sealed class HomeUiState {
     object Loading : HomeUiState()
 }
 
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 class HomeAcraViewModel(private val acaraRepository: AcaraRepository) : ViewModel() {
     var acaraUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
         private set
@@ -26,6 +28,7 @@ class HomeAcraViewModel(private val acaraRepository: AcaraRepository) : ViewMode
         getAcara()
     }
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun getAcara() {
         viewModelScope.launch {
             acaraUiState = HomeUiState.Loading
@@ -39,6 +42,7 @@ class HomeAcraViewModel(private val acaraRepository: AcaraRepository) : ViewMode
         }
     }
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun deleteAcara(id: String) {
         viewModelScope.launch {
             try {

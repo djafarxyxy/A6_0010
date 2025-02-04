@@ -1,8 +1,6 @@
 package com.example.aplikasi1.data.service
 
 import com.example.aplikasi1.data.model.Acara
-import com.example.aplikasi1.data.model.AcaraDetailResponse
-import com.example.aplikasi1.data.model.AcaraResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -22,13 +20,13 @@ interface AcaraService {
     @POST("insertacara.php")
     suspend fun insertAcara(@Body acara: Acara)
 
-    @GET("bacaacara.php")
+    @GET("getacara.php")
     suspend fun getAllAcara(): List<Acara>
 
     @GET("baca1acara.php/{id_acara}")
     suspend fun getAcaraById(@Query("id_acara") idAcara: String): Acara
 
-    @PUT("editacara.php/{id_acara}")
+    @PUT("updateacara.php/{id_acara}")
     suspend fun updateAcara(@Query("id_acara") idAcara: String, @Body acara: Acara)
 
     @DELETE("deleteacara.php/{id_acara}")

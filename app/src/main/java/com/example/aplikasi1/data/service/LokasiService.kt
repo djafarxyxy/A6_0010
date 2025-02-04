@@ -20,13 +20,13 @@ interface LokasiService {
     @POST("insertlokasi.php")
     suspend fun insertLokasi(@Body lokasi: Lokasi)
 
-    @GET("bacalokasi.php")
+    @GET("getlokasi.php")
     suspend fun getAllLokasi(): List<Lokasi>
 
     @GET("baca1lokasi.php/{id_lokasi}")
     suspend fun getLokasiById(@Query("id_lokasi") idLokasi: String): Lokasi
 
-    @PUT("editlokasi.php/{id_lokasi}")
+    @PUT("updatelokasi.php/{id_lokasi}")
     suspend fun updateLokasi(@Query("id_lokasi") idLokasi: String, @Body lokasi: Lokasi)
 
     @DELETE("deletelokasi.php/{id_lokasi}")

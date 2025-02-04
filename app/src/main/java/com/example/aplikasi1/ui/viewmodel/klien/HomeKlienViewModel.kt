@@ -1,6 +1,8 @@
 package com.example.aplikasi1.ui.viewmodel.klien
 
 import android.net.http.HttpException
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,6 +19,7 @@ sealed class KlienUiState {
     object Loading : KlienUiState()
 }
 
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 class HomeViewModelKlien(private val klienRepository: KlienRepository) : ViewModel() {
     var klienUiState: KlienUiState by mutableStateOf(KlienUiState.Loading)
         private set
@@ -25,6 +28,7 @@ class HomeViewModelKlien(private val klienRepository: KlienRepository) : ViewMod
         getKlien()
     }
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun getKlien() {
         viewModelScope.launch {
             klienUiState = KlienUiState.Loading
@@ -38,6 +42,7 @@ class HomeViewModelKlien(private val klienRepository: KlienRepository) : ViewMod
         }
     }
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun deleteKlien(idKlien: String) {
         viewModelScope.launch {
             try {

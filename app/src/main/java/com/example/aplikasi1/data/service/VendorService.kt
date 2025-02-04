@@ -20,13 +20,13 @@ interface VendorService {
     @POST("insertvendor.php")
     suspend fun insertVendor(@Body vendor: Vendor)
 
-    @GET("bacavendor.php")
+    @GET("getvendor.php")
     suspend fun getAllVendors(): List<Vendor>
 
     @GET("baca1vendor.php/{id_vendor}")
     suspend fun getVendorById(@Query("id_vendor") idVendor: String): Vendor
 
-    @PUT("editvendor.php/{id_vendor}")
+    @PUT("updatevendor.php/{id_vendor}")
     suspend fun updateVendor(@Query("id_vendor") idVendor: String, @Body vendor: Vendor)
 
     @DELETE("deletevendor.php/{id_vendor}")

@@ -28,7 +28,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.aplikasi1.data.model.Lokasi
 import com.example.aplikasi1.ui.cw.CostumeTopAppBar
 import com.example.aplikasi1.ui.navigasi.DestinasiNavigasi
 import com.example.aplikasi1.ui.viewmodel.PenyediaViewModel

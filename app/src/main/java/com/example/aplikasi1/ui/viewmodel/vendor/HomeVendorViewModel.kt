@@ -21,6 +21,7 @@ sealed class HomeUiState {
     object Loading : HomeUiState()
 }
 
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 class HomeViewModelVendor(private val vendorRepository: VendorRepository) : ViewModel() {
     var vendorUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
         private set

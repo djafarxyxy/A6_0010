@@ -1,7 +1,5 @@
 package com.example.aplikasi1.ui.viewmodel.lokasi
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplikasi1.data.model.Lokasi

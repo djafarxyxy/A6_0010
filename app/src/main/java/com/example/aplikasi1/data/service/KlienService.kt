@@ -20,13 +20,13 @@ interface KlienService {
     @POST("insertklien.php")
     suspend fun insertKlien(@Body klien: Klien)
 
-    @GET("bacaklien.php")
+    @GET("getklien.php")
     suspend fun getAllKlien(): List<Klien>
 
     @GET("baca1klien.php/{id_klien}")
     suspend fun getKlienById(@Query("id_klien") idKlien: String): Klien
 
-    @PUT("editklien.php/{id_klien}")
+    @PUT("updateklien.php/{id_klien}")
     suspend fun updateKlien(@Query("id_klien") idKlien: String, @Body klien: Klien)
 
     @DELETE("deleteklien.php/{id_klien}")
